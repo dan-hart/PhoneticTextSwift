@@ -151,7 +151,7 @@ public struct PhoneticTextSwift {
         
         for character in input {
             if character == " " {
-                outputComponents.append("SPACE")
+                outputComponents.append(PhoneticConstants.space)
                 continue
             }
             
@@ -175,22 +175,22 @@ public struct PhoneticTextSwift {
             }
         }
         
-        outputComponents.append("STOP")
+        outputComponents.append(PhoneticConstants.stop)
         return outputComponents.joined(separator: newLineOutput ? "\n" : delimiter)
     }
     
     public func reversePhonetic(_ phoneticString: String) -> String {
         let trimmedString = phoneticString.trimmingCharacters(in: .whitespacesAndNewlines)
         var lines = trimmedString.components(separatedBy: newLineOutput ? "\n" : delimiter)
-        if let lastLine = lines.last, lastLine == "STOP" {
+        if let lastLine = lines.last, lastLine == PhoneticConstants.stop {
             lines.removeLast()
         }
         
         var originalCharacters: [Character] = []
         for line in lines {
-            if line == "SPACE" {
+            if line == PhoneticConstants.space {
                 originalCharacters.append(" ")
-            } else if let colonIndex = line.firstIndex(of: ":") {
+            } else if line.firstIndex(of: ":") != nil {
                 let originalChar = line[line.startIndex]
                 originalCharacters.append(originalChar)
             } else if !line.isEmpty {

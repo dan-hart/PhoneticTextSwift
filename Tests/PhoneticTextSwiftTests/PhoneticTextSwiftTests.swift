@@ -96,7 +96,7 @@ final class PhoneticTextSwiftTests: XCTestCase {
         let input = ""
         let output = converter.convertToPhonetic(input)
         
-        XCTAssertEqual(output, "STOP")
+        XCTAssertEqual(output, PhoneticConstants.stop)
     }
     
     /// Tests conversion for a string with only whitespace.
