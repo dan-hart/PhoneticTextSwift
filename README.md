@@ -11,6 +11,16 @@ PhoneticTextSwift is a Swift package designed to convert any string into a clear
 - **Extensible:** Written with English in mind but designed for easy localization for future languages.
 - **Well-Tested:** Extensive test cases covering all letters, digits, and special characters.
 
+## Supported Platforms
+
+This package supports the following platforms:
+- iOS (v14+)
+- macOS (v13+)
+- macCatalyst (v13+)
+- tvOS (v14+)
+- watchOS (v7+)
+- visionOS (v1+)
+
 ## Installation
 
 Add PhoneticTextSwift to your dependencies in your `Package.swift`:
