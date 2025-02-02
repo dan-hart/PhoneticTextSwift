@@ -37,16 +37,39 @@ dependencies: [
 import PhoneticTextSwift
 
 // Create a converter with your preferred options.
-let converter = PhoneticTextSwift(includeCasePrefix: true, delimiter: "\n", newLineOutput: true)
+let converter = PhoneticTextSwift(
+    includeCasePrefix: true,
+    delimiter: "\n",
+    newLineOutput: true
+)
+
 let inputString = "xCBDeDe93;dDsQ"
 
 // Convert the input string to its phonetic representation.
 let phoneticString = converter.convertToPhonetic(inputString)
 print(phoneticString)
 
+/* Example Output:
+x: xray
+C: Charlie
+B: Bravo
+D: Delta
+e: echo
+D: Delta
+e: echo
+9: Nine
+3: Three
+; Semicolon
+d: delta
+D: Delta
+s: sierra
+Q: Quebec
+STOP
+*/
+
 // Reverse the phonetic string back to the original.
 let originalString = converter.reversePhonetic(phoneticString)
-print(originalString)
+print(originalString) // xCBDeDe93;dDsQ
 ```
 
 ## Testing

@@ -32,7 +32,8 @@ final class PhoneticTextSwiftTests: XCTestCase {
         let output = converter.convertToPhonetic(input)
         
         XCTAssertTrue(output.contains("0: Zero"))
-        XCTAssertTrue(output.contains("9: Niner"))
+        // "9" should be "Nine"
+        XCTAssertTrue(output.contains("9: Nine"))
     }
     
     // MARK: - Special Character Tests
@@ -53,7 +54,7 @@ final class PhoneticTextSwiftTests: XCTestCase {
     
     // MARK: - Case Prefix Tests
     
-    /// Tests the addition of "Capital" or "Lowercase" prefixes when enabled.
+    /// Tests the addition of "Capital" or "lowercase" prefixes when enabled.
     func testCasePrefixConversion() {
         let converter = PhoneticTextSwift(
             includeCasePrefix: true,
@@ -63,7 +64,7 @@ final class PhoneticTextSwiftTests: XCTestCase {
         let input = "aA"
         let output = converter.convertToPhonetic(input)
         
-        XCTAssertTrue(output.contains("a: Lowercase alpha"))
+        XCTAssertTrue(output.contains("a: lowercase alpha"))
         XCTAssertTrue(output.contains("A: Capital Alpha"))
     }
     
@@ -95,7 +96,6 @@ final class PhoneticTextSwiftTests: XCTestCase {
         let input = ""
         let output = converter.convertToPhonetic(input)
         
-        // Should only contain "STOP" since there are no characters.
         XCTAssertEqual(output, "STOP")
     }
     
@@ -106,11 +106,11 @@ final class PhoneticTextSwiftTests: XCTestCase {
             delimiter: "\n",
             newLineOutput: true
         )
-        let input = "   "
+        let input = "   " // Three spaces
         let output = converter.convertToPhonetic(input)
         
-        // Check that whitespace is handled (each space becomes "Space")
-        XCTAssertTrue(output.contains(" : Space"))
+        let expected = "SPACE\nSPACE\nSPACE\nSTOP"
+        XCTAssertEqual(output, expected)
     }
     
     /// Tests conversion with a custom delimiter (not new line).
@@ -123,7 +123,6 @@ final class PhoneticTextSwiftTests: XCTestCase {
         let input = "AB"
         let output = converter.convertToPhonetic(input)
         
-        // Ensure the output uses the custom delimiter.
         XCTAssertTrue(output.contains("A: Alpha | B: Bravo"))
     }
     
@@ -137,7 +136,7 @@ final class PhoneticTextSwiftTests: XCTestCase {
         let input = "🚀"
         let output = converter.convertToPhonetic(input)
         
-        // Emoji should be explicitly handled.
-        XCTAssertTrue(output.contains("🚀: Emoji"))
+        let expected = "🚀: Emoji\nSTOP"
+        XCTAssertEqual(output, expected)
     }
 }
